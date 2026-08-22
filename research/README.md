@@ -11,6 +11,7 @@ export $(grep -v '^#' ~/.config/blaquebaux/alpaca.env | xargs)   # or source it
 python research/balanced_1_value_vs_growth.py   # risk-adjusted value vs growth
 python research/balanced_2_margin_of_safety.py  # is cheapness a shallower tail? (the safety claim)
 python research/balanced_3_regime.py            # is value a conditional keeper (rising rates)?
+python research/balanced_4_naive_growth.py      # does rate_regime earn its keep on a NAIVE growth book?
 ```
 
 ## Scorecard (2016-01 → 2026-07 SIP, vs SPY)
@@ -20,6 +21,7 @@ python research/balanced_3_regime.py            # is value a conditional keeper 
 | 1 | Does value earn a risk-adjusted premium? | value LAGS growth: RPV Sharpe +0.60 / α −2.3% / M² −4.9% vs RPG +0.66 / −3.4% / −3.9%; value−growth spread **−1.9%/yr**, corr **+0.68** | ❌ a lower/different **beta**, not alpha (this decade) |
 | 2 | Is "margin of safety" real (shallower tail)? | **0/3 pairs** safer on the strict test: pure value's **maxDD −51% vs growth −37%**, skew **−0.59 vs −0.21**, fatter kurtosis. Value's *only* safety: lower **downside vol** (13.6% vs 16.8%) and it **cushions growth-specific crashes** (−2.1%/day vs −3.5% on growth's worst days) | ⚠️ **mostly a myth** — value crashes *harder* (2020 cyclicals); "safety" is diversification, not absolute downside |
 | 3 | Is value a *conditional* keeper (rising rates)? | **strikingly symmetric**: value−growth **+12.3%/yr when rates rise, −12.3%/yr when they fall**. Rate-timed rotation Sharpe +0.86 / α +1.8% / **M² −0.5%** — beats static value & growth, ~matches but **doesn't clear** SPY | ✅ **clearly regime-conditional**, but the coarse timing doesn't beat the index net of cost |
+| 4 | Does the published `rate_regime` earn its keep on a **naive** growth book? | **naive QQQ PASS 3/3** — DD **−35%→−29%** (18% cut), Sharpe +0.95→+1.04, keeps 90%, skew −0.19→−0.09; naive RPG MIXED (0% DD cut — its worst DD was 2020, not rate-driven). *Managed* broad's QQQ FAILED (0% cut — self-manages) | ✅ the signal is real — it earns it where the book is **unmanaged** *and* its worst DD is rate-driven |
 
 ## The synthesis
 

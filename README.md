@@ -47,6 +47,7 @@ Full detail in [`research/README.md`](research/README.md). Scorecard (Alpaca SIP
 | 1 | Does value earn a risk-adjusted premium? | ❌ value **lags growth** — a lower/different beta, not alpha (RPV α −2.3% / M² −4.9% vs RPG −3.4% / −3.9%; spread −1.9%/yr, corr +0.68) |
 | 2 | Is "margin of safety" real (shallower tail)? | ⚠️ **mostly a myth** — pure value's **maxDD −51% vs growth −37%**, worse skew (−0.59); value crashed *harder* (2020 cyclicals). Its only safety: lower downside vol + cushioning growth-specific selloffs (diversification, not absolute downside) |
 | 3 | Is value a *conditional* keeper (rising rates)? | ✅ **clearly regime-conditional** — value−growth **+12.3%/yr rising rates, −12.3%/yr falling**; but a rate-timed rotation (α +1.8% / M² −0.5%) beats both styles yet **doesn't clear** the SPY hurdle net of cost |
+| 4 | Does the published signal earn its keep on a **naive** growth book? | ✅ **naive QQQ PASS 3/3** — DD −35%→−29% (18% cut), Sharpe +0.95→+1.04, keeps 90% (managed broad's QQQ failed — it self-manages). The overlay earns it where the book is unmanaged *and* its worst DD is rate-driven |
 
 **The synthesis:** *"Is value still crucial to safety?"* — not the way the folklore says. As a **factor** this
 decade, value was a lower-vol-with-worse-crashes **rate bet in disguise**: it lagged growth risk-adjusted,
@@ -81,6 +82,14 @@ The published signal is the family's 4th regime read (alongside bonds' stock-bon
 dollar trend, and benchmark's market internals). Honestly labeled: the regime is real; the coarse rotation
 it drives doesn't beat the index alone — it's an *ingredient* for a consumer to combine.
 
+**The signal is validated to earn its keep — on the right consumer.**
+[`research/balanced_4_naive_growth.py`](research/balanced_4_naive_growth.py) tests it on a **naive** growth
+book: de-risking buy-&-hold **QQQ** when rates rise **passes the full family bar** (DD −35%→−29%, a 18% cut;
+Sharpe +0.95→+1.04; keeps 90% of return). The *same* signal on *managed* QQQ ([broad](https://github.com/blaquebaux/broad),
+trend + vol-target) cut 0% off drawdown and shipped opt-in — because broad already spent the drawdown
+protection. The law (benchmark #4): **a de-risking overlay's value ∝ how unmanaged the book is** — and here,
+also whether the book's worst drawdown is actually rate-driven (QQQ's was 2022; RPG's was 2020, so RPG is mixed).
+
 ## About Blaque Baux
 
 **Blaque Baux** is a quantitative research initiative and a subsidiary of **[Carter Warrens](https://carterwarrens.com)**.
@@ -101,7 +110,7 @@ base/blueprint and holds the [full family roster](https://github.com/blaquebaux/
 ## Layout
 ```
 engine/     the Blaque Baux platform (git submodule -> blaquebaux/base)
-research/   _balanced_common.py (loaders + JB/Jensen/M² toolkit) + balanced_1_value_vs_growth / _2_margin_of_safety / _3_regime + scorecard
+research/   _balanced_common.py (loaders + JB/Jensen/M² toolkit) + balanced_1_value_vs_growth / _2_margin_of_safety / _3_regime / _4_naive_growth + scorecard
 live/       balanced_rate_emitter.py (publishes rate_regime.txt) + run_balanced_rate.sh + plist
 live/       governed live drivers (once a sleeve graduates to paper A/B)
 ```
