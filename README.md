@@ -60,7 +60,26 @@ discipline), not the top-down value ETF — which is exactly what separates this
 **Research: first pass complete — value is a rate-regime bet, "margin of safety" mostly a myth at the factor
 level.** Value lagged growth risk-adjusted, crashed harder than growth (−51% vs −37%), and its strong clean
 signal is rate-conditional (+12/−12%/yr) but too coarse to beat the index net of cost. A conditional-keeper
-ingredient, not a standalone edge. No live driver.
+ingredient, not a standalone edge. No trading driver — it publishes its signal for the family (below).
+
+## Live — publishes the rate regime (`rate_regime.txt`)
+
+The rotation isn't a standalone keeper, but the *signal underneath it* is clean and strong — so, exactly as
+[bonds](https://github.com/blaquebaux/bonds)/[brics](https://github.com/blaquebaux/brics)/[benchmark](https://github.com/blaquebaux/benchmark)
+publish their regime reads even when their own trading edge is marginal, **balanced publishes the rate
+regime** as its real product. [`live/balanced_rate_emitter.py`](live/balanced_rate_emitter.py) writes
+`~/.config/blaquebaux/rate_regime.txt` — the rising/falling-rate state from `IEF`'s 100d trend, with the
+validated implication (`value_tilt=value` when rates rise, `growth` when they fall). Any value-sensitive
+sleeve can consume it; read-only on prices, it writes only the regime file.
+
+```bash
+python3 live/balanced_rate_emitter.py           # publish ~/.config/blaquebaux/rate_regime.txt
+BB_DRYRUN=1 python3 live/balanced_rate_emitter.py   # print only, write nothing
+```
+
+The published signal is the family's 4th regime read (alongside bonds' stock-bond correlation, brics'
+dollar trend, and benchmark's market internals). Honestly labeled: the regime is real; the coarse rotation
+it drives doesn't beat the index alone — it's an *ingredient* for a consumer to combine.
 
 ## About Blaque Baux
 
@@ -83,6 +102,7 @@ base/blueprint and holds the [full family roster](https://github.com/blaquebaux/
 ```
 engine/     the Blaque Baux platform (git submodule -> blaquebaux/base)
 research/   _balanced_common.py (loaders + JB/Jensen/M² toolkit) + balanced_1_value_vs_growth / _2_margin_of_safety / _3_regime + scorecard
+live/       balanced_rate_emitter.py (publishes rate_regime.txt) + run_balanced_rate.sh + plist
 live/       governed live drivers (once a sleeve graduates to paper A/B)
 ```
 

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!-- balanced — publishes rate_regime.txt (rising/falling rates → value/growth tilt) for the family.
+     Read-only; writes only the regime file. Runs pre-open so consumers see a fresh signal. -->
+<plist version="1.0"><dict>
+  <key>Label</key><string>com.blaquebaux.balanced-rate</string>
+  <key>ProgramArguments</key><array><string>/bin/bash</string><string>/Users/malcolmx/blaquebaux-balanced/live/run_balanced_rate.sh</string></array>
+  <key>StartCalendarInterval</key><array><dict><key>Hour</key><integer>9</integer><key>Minute</key><integer>10</integer></dict></array>
+  <key>RunAtLoad</key><false/>
+  <key>EnvironmentVariables</key><dict><key>PATH</key><string>/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/bin</string></dict>
+  <key>StandardOutPath</key><string>/Users/malcolmx/blaquebaux-balanced/logs/launchd_balanced_rate.out</string>
+  <key>StandardErrorPath</key><string>/Users/malcolmx/blaquebaux-balanced/logs/launchd_balanced_rate.err</string>
+</dict></plist>
