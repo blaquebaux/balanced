@@ -38,11 +38,29 @@ coarse vs a true fundamental cheapness screen — flagged.
 - **Regime-conditional value.** Value vs growth conditioned on the rate regime (`IEF` trend): is value a
   *conditional* keeper — on when rates rise, off when they fall?
 
+## Research — first pass done
+
+Full detail in [`research/README.md`](research/README.md). Scorecard (Alpaca SIP, 2016–2026, vs `SPY`):
+
+| # | Question | Verdict |
+|---|----------|---------|
+| 1 | Does value earn a risk-adjusted premium? | ❌ value **lags growth** — a lower/different beta, not alpha (RPV α −2.3% / M² −4.9% vs RPG −3.4% / −3.9%; spread −1.9%/yr, corr +0.68) |
+| 2 | Is "margin of safety" real (shallower tail)? | ⚠️ **mostly a myth** — pure value's **maxDD −51% vs growth −37%**, worse skew (−0.59); value crashed *harder* (2020 cyclicals). Its only safety: lower downside vol + cushioning growth-specific selloffs (diversification, not absolute downside) |
+| 3 | Is value a *conditional* keeper (rising rates)? | ✅ **clearly regime-conditional** — value−growth **+12.3%/yr rising rates, −12.3%/yr falling**; but a rate-timed rotation (α +1.8% / M² −0.5%) beats both styles yet **doesn't clear** the SPY hurdle net of cost |
+
+**The synthesis:** *"Is value still crucial to safety?"* — not the way the folklore says. As a **factor** this
+decade, value was a lower-vol-with-worse-crashes **rate bet in disguise**: it lagged growth risk-adjusted,
+crashed *harder* than growth (−51% vs −37% — the margin-of-safety claim inverted), and its one clean, strong
+signal is rate-conditional (+12/−12%/yr) but too coarse to beat the index net of cost. A conditional-keeper
+**ingredient**, not a standalone edge. Margin of safety belongs at the **security** level (Graham's bottom-up
+discipline), not the top-down value ETF — which is exactly what separates this from the
+[buffett](https://github.com/blaquebaux/buffett) blend and the [bogle](https://github.com/blaquebaux/bogle) hurdle.
+
 ## Status
-**[Concept] — scaffolded, not yet built.** Thesis (margin of safety; value-vs-growth as factor, distinct
-from the buffett blend), the conditional-keeper angle (value ~ rising rates), and the clean ETF data path
-are defined. Verdicts use the fat-tail toolkit (Jarque-Bera + Jensen's alpha + M²). No research run yet; no
-live driver.
+**Research: first pass complete — value is a rate-regime bet, "margin of safety" mostly a myth at the factor
+level.** Value lagged growth risk-adjusted, crashed harder than growth (−51% vs −37%), and its strong clean
+signal is rate-conditional (+12/−12%/yr) but too coarse to beat the index net of cost. A conditional-keeper
+ingredient, not a standalone edge. No live driver.
 
 ## About Blaque Baux
 
@@ -64,7 +82,7 @@ base/blueprint and holds the [full family roster](https://github.com/blaquebaux/
 ## Layout
 ```
 engine/     the Blaque Baux platform (git submodule -> blaquebaux/base)
-research/   _balanced_common.py (loaders + JB/Jensen/M² toolkit) + sketches + scorecard  [to build]
+research/   _balanced_common.py (loaders + JB/Jensen/M² toolkit) + balanced_1_value_vs_growth / _2_margin_of_safety / _3_regime + scorecard
 live/       governed live drivers (once a sleeve graduates to paper A/B)
 ```
 
